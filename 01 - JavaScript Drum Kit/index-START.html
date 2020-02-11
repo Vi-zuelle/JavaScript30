@@ -57,9 +57,39 @@
   <audio data-key="75" src="sounds/tom.wav"></audio>
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
+
 <script>
 
+// listen keydown event
+  window.addEventListener("keydown", e => {
+    // ******* play audio ******* 
+    // select the audio sound
+    myAudio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    // if sound does not exist return nothing (vs error)
+    if(!myAudio) return;
+    // play the sound
+    myAudio.play();
+    // go back to beginning to be able to play several times
+    myAudio.currentTime = 0;
+    // ******* display golden borders *******
+    // select the div
+    myBorder = document.querySelector(`div[data-key="${e.keyCode}"]`);
+    // add the playing style in the class
+    myBorder.classList.add("playing");
+    // remove golden borders
+    // add event listener on end of transition
+    window.addEventListener("transitionend", event => {
+      // listen only on one of the event (for better performance)
+      if(event.propertyName != "transform") return;
+      // remove the golden borders
+      myBorder.classList.remove("playing");
+    console.log(event);
+    });
+
+  });
+
 </script>
+
 
 
 </body>

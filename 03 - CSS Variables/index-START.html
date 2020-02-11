@@ -26,6 +26,13 @@
       misc styles, nothing to do with CSS variables
     */
 
+    /*define the root variables*/
+    :root {
+      --base: #ffc600;
+      --spacing: 10px;
+      --blur:0px;
+    }
+
     body {
       text-align: center;
       background: #193549;
@@ -42,9 +49,37 @@
     input {
       width: 100px;
     }
+
+    .hl{
+      color: var(--base);
+    }
+
+    img {
+      padding: var(--spacing);
+      background: var(--base);
+      filter: blur(var(--blur));
+    }
+
   </style>
 
   <script>
+
+    // select the input components
+    // const inputs = document.querySelectorAll("input");
+    // console.log(inputs);
+    window.addEventListener('change', e => {
+      console.log(e.target.name);
+      const changingName = e.target.name;
+      const changedValue = e.target.value;
+      const suffix = e.target.dataset.sizing || '';
+      // inputs.forEach(input => {
+      document.documentElement.style.setProperty(`--${changingName}`,`${changedValue}${suffix}`);
+      console.log(`--${changingName}: ${changedValue}${suffix}`);
+      // });
+
+    });
+    // change the input element change when change and mousemove
+
   </script>
 
 </body>
