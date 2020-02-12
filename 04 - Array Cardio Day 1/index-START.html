@@ -27,12 +27,11 @@
       { first: 'Hanna', last: 'Hammarström', year: 1829, passed: 1909 }
     ];
 
-    const people = ['Beck, Glenn', 'Becker, Carl', 'Beckett, Samuel', 'Beddoes, Mick', 'Beecher, Henry', 'Beethoven, Ludwig', 'Begin, Menachem', 'Belloc, Hilaire', 'Bellow, Saul', 'Benchley, Robert', 'Benenson, Peter', 'Ben-Gurion, David', 'Benjamin, Walter', 'Benn, Tony', 'Bennington, Chester', 'Benson, Leana', 'Bent, Silas', 'Bentsen, Lloyd', 'Berger, Ric', 'Bergman, Ingmar', 'Berio, Luciano', 'Berle, Milton', 'Berlin, Irving', 'Berne, Eric', 'Bernhard, Sandra', 'Berra, Yogi', 'Berry, Halle', 'Berry, Wendell', 'Bethea, Erin', 'Bevan, Aneurin', 'Bevel, Ken', 'Biden, Joseph', 'Bierce, Ambrose', 'Biko, Steve', 'Billings, Josh', 'Biondo, Frank', 'Birrell, Augustine', 'Black, Elk', 'Blair, Robert', 'Blair, Tony', 'Blake, William'];
 
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
-    const filteredInventors = inventors.filter(inventor => inventor.year > 1500 && inventor.year < 1600 );
-    console.table(filteredInventors);
+    fifteens = inventors.filter(inventor => inventor.year >= 1500 && inventor.year < 1600 );
+    console.table(fifteens);
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors first and last names
@@ -41,54 +40,82 @@
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
-    const sortInventors = inventors.sort((a, b) => a.year > b.year ? 1 : -1);
-    console.table(sortInventors);
+    const sorted = inventors.sort((a , b) => a.year < b.year ? 1 : -1);
+    console.table(sorted);
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
-    const totalYrsLivedByAllInventors = inventors.reduce((total, inventor) => total + (inventor.passed - inventor.year), 0);
-    console.log(totalYrsLivedByAllInventors);
+    // let reducer = ((acc, curr) => acc + curr);
+    // const total = lifes.reduce(life => (0, life));
 
-    // 5. Sort the inventors by years lived
-    const sortByYrsLived = inventors.sort((a, b) => (a.passed - a.year) > (b.passed - b.year) ? 1 : -1);
-    console.table(sortByYrsLived);
+
+    let totalYears = inventors.reduce((total, inventor) => (total + inventor.passed - inventor.year), 0);
+    console.table(totalYears);
+
+
+    const lifes = inventors.map(inventor => inventor.passed - inventor.year);
+    const totalYears2 = lifes.reduce((a, b) => a+b, 0);
+    console.table(totalYears2);
+
+
+    // 5. Sort the inventors by years lived (previously added to col life to check if works)
+
+    const test = inventors.forEach(inventor => inventor["life"]=inventor.passed - inventor.year);
+    console.table(inventors);
+
+    const sortYrsLived = inventors.sort((a, b) => (a.passed - a.year) < (b.passed - b.year) ? 1 : -1);
+    console.table(sortYrsLived);
+
+
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
-    const cat = document.querySelector(".mw-category");
-    const myLinks = Array.from(cat.querySelectorAll("a"));
-    const linksArray = myLinks.map(link => link.text)
-    const result = linksArray.filter(link => link.includes("de"));
     
-    console.log(result); 
-
-    // *********** OR ***********
-    const cat = document.querySelector(".mw-category");
-    const myLinks = Array.from(cat.querySelectorAll("a"));
-    const result = myLinks.map(link => link.text).filter(link => link.includes("de"));
+    // const cat2 = document.querySelector(".mw-category");
+    // const myLinks2 = Array.from(cat2.querySelectorAll("a"));
+    // const linksArray = myLinks2.map(link => link.text)
+    // const result2 = linksArray.filter(link => link.includes("de"));
     
-    console.log(result); 
+    // console.log(result); 
 
-    // *********** OR ***********
-    const cat = document.querySelector(".mw-category");
-    const myLinks = Array.from(cat.querySelectorAll("a"));
-    const result = myLinks
-      .map(link => link.text)
-      .filter(link => link.includes("de"));
+    // // *********** OR ***********
+    // const cat1 = document.querySelector(".mw-category");
+    // const myLinks3 = Array.from(cat1.querySelectorAll("a"));
+    // const result3 = myLinks3.map(link => link.text).filter(link => link.includes("de"));
     
-    console.log(result); 
- 
+    // console.log(result); 
 
+    // // *********** OR ***********
+    // const cat = document.querySelector(".mw-category");
+    // const myLinks = Array.from(cat.querySelectorAll("a"));
+    // const result = myLinks
+    //   .map(link => link.text)
+    //   .filter(link => link.includes("de"));
+    
+    // console.log(result); 
 
 
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+    const people = ['Beck, Glenn', 'Becker, Carl', 'Beckett, Samuel', 'Beddoes, Mick', 'Beecher, Henry', 'Beethoven, Ludwig', 'Begin, Menachem', 'Belloc, Hilaire', 'Bellow, Saul', 'Benchley, Robert', 'Benenson, Peter', 'Ben-Gurion, David', 'Benjamin, Walter', 'Benn, Tony', 'Bennington, Chester', 'Benson, Leana', 'Bent, Silas', 'Bentsen, Lloyd', 'Berger, Ric', 'Bergman, Ingmar', 'Berio, Luciano', 'Berle, Milton', 'Berlin, Irving', 'Berne, Eric', 'Bernhard, Sandra', 'Berra, Yogi', 'Berry, Halle', 'Berry, Wendell', 'Bethea, Erin', 'Bevan, Aneurin', 'Bevel, Ken', 'Biden, Joseph', 'Bierce, Ambrose', 'Biko, Steve', 'Billings, Josh', 'Biondo, Frank', 'Birrell, Augustine', 'Black, Elk', 'Blair, Robert', 'Blair, Tony', 'Blake, William'];
+    mySplit = people.map( p => p.split(", "));
+    result = mySplit.sort((a, b) => a[1] > b[1] ? 1 : -1);
+    console.table(result);
+
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
-
+    let countedNames = data.reduce((allNames, name) => {
+      if (name in allNames) {
+      allNames[name]++;
+      } else {
+        allNames[name] = 1
+      }
+      return allNames;
+    }, {});
+    console.table(countedNames);
   </script>
 </body>
 </html>
